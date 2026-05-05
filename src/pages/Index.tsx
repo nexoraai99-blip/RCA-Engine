@@ -15,7 +15,7 @@ import { SystemTrace, type TraceLine } from "@/components/SystemTrace";
 import { IncidentCards } from "@/components/IncidentCards";
 import { RcaReport } from "@/components/RcaReport";
 
-type Phase = "idle" | "tracing" | "ready" | "report" | "error";
+type Phase = "idle" | "tracing" | "ready" | "synthesizing" | "report" | "error";
 
 const Index = () => {
   const [query, setQuery] = useState("");
