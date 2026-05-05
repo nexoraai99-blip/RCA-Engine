@@ -45,13 +45,14 @@ The engine quantifies the impact of every incident by calculating key performanc
 *   **Deployment:** Optimized for Vercel/Netlify
 
 ---
-📈 Business Impact
+## 📈 Business Impact
 This tool solves the "Communication Black Hole" where support teams lose visibility once a bug is escalated. By automating the feedback loop, the RCA Engine reduces the time spent on manual post-mortems by up to 80%, allowing engineering teams to focus on resolution rather than documentation.
 
-🛠️ Key Technical Challenges Overcome
-Asynchronous Mapping: Solved the complexity of one Zendesk ticket mapping to multiple Jira sub-tasks and tracking their individual statuses.
+## 🛠️ Key Technical Challenges Overcome
 
-Synthetic Data Generation: Developed a custom MockService that generates realistic, non-sensitive data for demonstration purposes, allowing the engine to be showcased without exposing live production environments.
+**Asynchronous Mapping**: Solved the complexity of one Zendesk ticket mapping to multiple Jira sub-tasks and tracking their individual statuses.
+
+**Synthetic Data Generation**: Developed a custom MockService that generates realistic, non-sensitive data for demonstration purposes, allowing the engine to be showcased without exposing live production environments.
 
 ---
 
