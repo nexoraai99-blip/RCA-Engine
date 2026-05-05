@@ -215,8 +215,8 @@ const Index = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-                  <div className="h-full w-1/2 bg-gradient-to-r from-primary via-accent to-primary animate-[shimmer_1.4s_ease-in-out_infinite] rounded-full" style={{ backgroundSize: "200% 100%" }} />
+                <div className="h-2 w-full overflow-hidden rounded-full bg-muted relative">
+                  <div className="absolute inset-y-0 left-0 w-1/3 rounded-full bg-gradient-to-r from-transparent via-accent to-transparent animate-shimmer" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
                   {["Summary", "Root Cause", "Action Items"].map((s, i) => (
