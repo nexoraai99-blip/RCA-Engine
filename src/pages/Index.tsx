@@ -147,7 +147,7 @@ const Index = () => {
         </section>
 
         {/* Trace */}
-        {(phase === "tracing" || phase === "ready" || phase === "report") && record && (
+        {phase !== "idle" && phase !== "error" && record && (
           <section className="space-y-2">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -158,7 +158,8 @@ const Index = () => {
               </span>
             </div>
             <SystemTrace
-              active={phase === "tracing" || phase === "ready" || phase === "report"}
+              key={record.zendesk.ticket_id}
+              active={true}
               lines={traceLines}
               onComplete={() => setPhase((p) => (p === "tracing" ? "ready" : p))}
             />
