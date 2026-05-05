@@ -61,6 +61,50 @@ export const mockData: IncidentRecord[] = [
       component: "Infrastructure",
     },
   },
+  {
+    scenario: "Security Audit Failure (Shadow Access)",
+    zendesk: {
+      ticket_id: "ZD-404",
+      created_at: "2026-05-10T10:00:00Z",
+      subject: "Security Alert: Unauthorized File Access",
+      description:
+        "During a routine audit, we noticed that an account belonging to Mark Stevens (m.stevens@legacy.com) modified a file in the 'M&A_Confidential' folder this morning. This is a critical security breach.",
+      priority: "Critical",
+      comments: ["Agent: Immediate escalation to Security Ops. Tracking via JIRA-SEC-12."],
+    },
+    jira: {
+      issue_id: "JIRA-SEC-12",
+      resolved_at: "2026-05-10T11:45:00Z",
+      summary: "SSO Bypass: Legacy Local Account discovered",
+      description:
+        "User Mark Stevens had a local SharePoint account created manually in 2022 that was not synced to Entra ID. When his main SSO account was disabled, this local account remained active.",
+      resolution:
+        "Deleted local account. Running a script to identify all other non-SSO accounts in SharePoint.",
+      component: "IAM-Security",
+    },
+  },
+  {
+    scenario: "Global Portal Outage (SSL Expiry)",
+    zendesk: {
+      ticket_id: "ZD-505",
+      created_at: "2026-05-12T00:05:00Z",
+      subject: "Main Portal is down - Privacy Error",
+      description:
+        "None of our employees can log in. Chrome is showing a 'NET::ERR_CERT_DATE_INVALID' error. This is affecting 4,000+ staff at support@globalcorp.com.",
+      priority: "Critical",
+      comments: ["Agent: Major incident declared. DevOps notified via JIRA-INFRA-99."],
+    },
+    jira: {
+      issue_id: "JIRA-INFRA-99",
+      resolved_at: "2026-05-12T01:30:00Z",
+      summary: "Production SSL Certificate Renewal Failure",
+      description:
+        "The wild-card certificate for *.company.com expired at 00:00. The automated renewal bot failed because the DNS validation TXT record was missing.",
+      resolution:
+        "Manually renewed certificate via DigiCert and updated the Load Balancer. Verified site is back up.",
+      component: "Infrastructure-DevOps",
+    },
+  },
 ];
 
 const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
@@ -73,6 +117,6 @@ export function scrubPII(text: string): string {
 }
 
 export function findLinkedJiraId(text: string): string | null {
-  const m = text.match(/JIRA-\d+/);
+  const m = text.match(/JIRA-[A-Z]*\d+|JIRA-\d+/);
   return m ? m[0] : null;
 }
