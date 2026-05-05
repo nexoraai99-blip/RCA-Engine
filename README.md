@@ -52,6 +52,7 @@ This tool solves the "Communication Black Hole" where support teams lose visibil
 Asynchronous Mapping: Solved the complexity of one Zendesk ticket mapping to multiple Jira sub-tasks and tracking their individual statuses.
 
 Synthetic Data Generation: Developed a custom MockService that generates realistic, non-sensitive data for demonstration purposes, allowing the engine to be showcased without exposing live production environments.
+
 ---
 
 ## 📁 Project Structure
