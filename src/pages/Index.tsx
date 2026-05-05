@@ -15,7 +15,7 @@ import { SystemTrace, type TraceLine } from "@/components/SystemTrace";
 import { IncidentCards } from "@/components/IncidentCards";
 import { RcaReport } from "@/components/RcaReport";
 
-type Phase = "idle" | "tracing" | "ready" | "report" | "error";
+type Phase = "idle" | "tracing" | "ready" | "synthesizing" | "report" | "error";
 
 const Index = () => {
   const [query, setQuery] = useState("");
@@ -166,7 +166,7 @@ const Index = () => {
         )}
 
         {/* Comparison */}
-        {(phase === "ready" || phase === "report") && record && (
+        {(phase === "ready" || phase === "synthesizing" || phase === "report") && record && (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -182,7 +182,10 @@ const Index = () => {
               <div className="flex justify-center pt-2">
                 <Button
                   size="lg"
-                  onClick={() => setPhase("report")}
+                  onClick={() => {
+                    setPhase("synthesizing");
+                    setTimeout(() => setPhase("report"), 1800);
+                  }}
                   className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground"
                 >
                   <Sparkles className="h-4 w-4" />
@@ -190,6 +193,45 @@ const Index = () => {
                 </Button>
               </div>
             )}
+          </section>
+        )}
+
+        {/* Synthesizing loader */}
+        {phase === "synthesizing" && record && (
+          <section className="space-y-3 animate-fade-in">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Synthesizing Report
+            </h2>
+            <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="relative h-9 w-9 rounded-md bg-accent/10 text-accent flex items-center justify-center">
+                  <Sparkles className="h-4 w-4 animate-pulse" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold">Drafting post-mortem…</div>
+                  <div className="text-xs text-muted-foreground font-mono-terminal">
+                    correlating · scrubbing · formatting markdown
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-muted relative">
+                  <div className="absolute inset-y-0 left-0 w-1/3 rounded-full bg-gradient-to-r from-transparent via-accent to-transparent animate-shimmer" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
+                  {["Summary", "Root Cause", "Action Items"].map((s, i) => (
+                    <div
+                      key={s}
+                      className="rounded-md border border-border bg-muted/30 px-3 py-2 text-xs font-mono-terminal text-muted-foreground flex items-center gap-2"
+                      style={{ animation: `fade-in 0.4s ease-out ${i * 0.25}s both` }}
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                      generating · {s.toLowerCase()}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
         )}
 
