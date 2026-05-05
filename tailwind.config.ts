@@ -39,6 +39,22 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        terminal: {
+          bg: "hsl(var(--terminal-bg))",
+          fg: "hsl(var(--terminal-fg))",
+          muted: "hsl(var(--terminal-muted))",
+          accent: "hsl(var(--terminal-accent))",
+          warning: "hsl(var(--terminal-warning))",
+          info: "hsl(var(--terminal-info))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
